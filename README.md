@@ -6,7 +6,7 @@ Installed nginx role using ansible-galaxy
 
 #command to install role
 
-ansible-galaxy install --roles-path
+ansible-galaxy install --roles-path <path-to-role> <role-name>
 
 #command to run playbook
 
