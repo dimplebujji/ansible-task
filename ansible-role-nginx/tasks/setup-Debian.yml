@@ -3,9 +3,36 @@
   apt: update_cache=yes cache_valid_time=86400
   changed_when: false
   become: yes
+
 - name: Ensure nginx is installed.
   apt:
     name: "{{ nginx_package_name }}"
     state: present
     default_release: "{{ nginx_default_release }}"
+  become: yes
+
+- name: install ufw
+  apt: 
+    name: ufw
+    state: present
+  become: yes
+
+- name: ensure ufw is stopped
+  service:
+    name: ufw
+    state: stopped
+  become: yes
+
+- name: Firewall access to port 80
+  ufw:
+    rule: allow
+    port: '80'
+    proto: tcp
+  become: yes
+
+- name: Firewall access to port 22
+  ufw:
+    rule: allow
+    port: '22'
+    proto: tcp
   become: yes
